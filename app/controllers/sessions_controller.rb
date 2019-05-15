@@ -3,9 +3,10 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = User.find_by(name: params[:name])
-    if @user && @user.authenticate(params[:password])
-      session[:user_id] = @user.id
+    user = User.find_by(name: params[:name])
+    if user && user.authenticate(params[:password])
+      session[:user_id] = user.id
+      @user = user 
       flash[:success] = "You have sucessfully logged in!"
       redirect_to controller: 'welcome', action: 'home'
     else
