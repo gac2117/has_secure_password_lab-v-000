@@ -9,6 +9,7 @@ class UsersController < ApplicationController
       redirect_to controller: 'welcome', action: 'home'
     else
       redirect_to controller: 'users', action: 'new'
+    end
   end
 
   private
