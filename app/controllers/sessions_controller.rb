@@ -4,8 +4,14 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.find_by(name: params[:name])
-    return head(:forbidden) unless @user.authenticate(params[:password])
-    session[:user_id] = @user.id
+    if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
+      flash[:success] = "You have sucessfully logged in!"
+      redirect_to '/home'
+    else
+      flash[:warning] = "Please try again."
+      redirect_to '/login'
+    end
   end
 
   def destroy
