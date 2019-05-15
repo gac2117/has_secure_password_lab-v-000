@@ -7,10 +7,10 @@ class SessionsController < ApplicationController
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       flash[:success] = "You have sucessfully logged in!"
-      redirect_to '/home'
+      redirect_to controller: 'welcome', action: 'home'
     else
       flash[:warning] = "Please try again."
-      redirect_to '/login'
+      redirect_to controller: 'sessions', action: 'new'
     end
   end
 
